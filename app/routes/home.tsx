@@ -2,6 +2,8 @@ import Navbar from "components/Navbar";
 import type { Route } from "./+types/home";
 import { ArrowRight, Clock, Layers } from "lucide-react";
 import Button from "components/ui/Button";
+import Upload from "components/Upload";
+import { useNavigate } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -11,6 +13,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
+  const navigate =useNavigate();
+  const handleUploadComplete = async(base64Image:string)=>{
+    const newId = Date.now().toString();
+    navigate(`/visualizer/${newId}`);
+    return true;
+  }
   return (
     <div className="home">
       <Navbar />
@@ -45,7 +53,10 @@ export default function Home() {
               <h3>Upload your floor plan</h3>
               <p>Supports JPG, PNG, formats up to 10MB</p>
             </div>
-            <p>Upload Images</p>
+
+            <Upload
+              onComplete={handleUploadComplete}
+            />
           </div>
         </div>
       </section>
@@ -62,7 +73,10 @@ export default function Home() {
           <div className="projects-grid">
             <div className="project-card group">
               <div className="preview">
-                <img src="" alt="Project" />
+                <img
+                  src="https://roomify-mlhuk267-dfwu1i.puter.site/projects/1770803585402/rendered.png"
+                  alt="Project"
+                />
                 <div className="badge">
                   <span>Coummunity</span>
                 </div>
@@ -71,15 +85,13 @@ export default function Home() {
                 <div>
                   <h3>Project Manhattan</h3>
                   <div className="meta">
-                    <Clock size={12}/>
-                    <span>
-                      {new Date('01.01.2026').toLocaleDateString()}
-                    </span>
+                    <Clock size={12} />
+                    <span>{new Date("01.01.2026").toLocaleDateString()}</span>
                     <span>By Pratyush</span>
                   </div>
                 </div>
                 <div className="arrow">
-                  <ArrowRight size={18}/>
+                  <ArrowRight size={18} />
                 </div>
               </div>
             </div>
