@@ -16,7 +16,7 @@ export const getOrCreateHostingConfig =
         await puter.kv.set(HOSTING_CONFIG_KEY, record);
         return record;
     } catch (e) {
-        console.warn(`Could not find subdomain: $(e)`);
+        console.warn(`Could not find subdomain: ${e}`);
         return null;
     }
   };
